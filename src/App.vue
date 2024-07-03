@@ -42,8 +42,11 @@ export default {
     },
 
     addActivity(activityData) {
+
+      const numberLastId = this.activities[this.activities.length - 1]?.id ?? 0
+
       this.activities.push({
-        id: this.activities.length + 1,
+        id: numberLastId + 1,
         ...activityData
       })
 
