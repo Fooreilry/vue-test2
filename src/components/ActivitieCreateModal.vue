@@ -1,17 +1,16 @@
 <template>
-    <v-dialog v-model="this.dialog" max-width="500px">
+    <v-dialog :model-value="modelValue" @update:model-value="$emit('update:modelValue', $event)" max-width="500px">
         <v-card>
             <v-card-title>Добавить активность</v-card-title>
             <v-card-text>
-                <v-select v-model="newActivity.type" :items="activityTypes" label="Выберите активность"></v-select>
-                <v-text-field v-model.number="newActivity.years" label="Сколько лет увлекаетесь"
-                    type="number"></v-text-field>
-                <v-textarea v-model="newActivity.comment" label="Комментарий"></v-textarea>
+                <v-select v-model="newActivity.type" :items="activityTypes" label="Выберите активность" />
+                <v-text-field v-model.number="newActivity.years" label="Сколько лет увлекаетесь" type="number" />
+                <v-textarea v-model="newActivity.comment" label="Комментарий" />
                 <v-select v-if="newActivity.type === 'велосипеды'" v-model="newActivity.bikeType" :items="bikeTypes"
-                    label="Тип велосипеда"></v-select>
+                    label="Тип велосипеда" />
             </v-card-text>
             <v-card-actions>
-                <v-spacer></v-spacer>
+                <v-spacer />
                 <v-btn color="blue darken-1" text @click="closeDialog">Отменить</v-btn>
                 <v-btn color="blue darken-1" text @click="addActivity">Добавить</v-btn>
             </v-card-actions>
@@ -23,13 +22,13 @@
 export default {
 
     props: {
-        dialog: {
+        modelValue: {
             type: Boolean,
             required: true
         }
     },
 
-    emits: ['close-dialog', 'add-activity'],
+    emits: ['update:modelValue', 'add-activity'],
 
     data() {
         return {
@@ -52,12 +51,12 @@ export default {
             this.$emit('add-activity', this.newActivity)
             this.resetNewActivity()
         },
-        
+
         closeDialog() {
-            this.$emit('close-dialog')
+            this.$emit('udate:modelValue', false)
             this.resetNewActivity()
         },
-        
+
         resetNewActivity() {
             this.newActivity = {
                 type: '',

@@ -41,7 +41,7 @@ export default {
             this.$emit('delete-activity', activityId)
         }
     }
-    
+
 }
 </script>
 
